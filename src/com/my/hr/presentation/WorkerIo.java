@@ -13,6 +13,28 @@ public class WorkerIo {
 		this.workerService = workerService;
 	}
 	
+	public void play() {
+		int choice = 0;
+		
+		do {
+			boolean isGood = false;
+			
+			do {
+				choice = Console.inNum("1.목록, 2.추가, 3.수정, 4.삭제, 0.종료");
+				isGood = 0 <= choice && choice <= 4;
+				if(!isGood) Console.err("0에서 4사이 숫자를 입력하세요.");
+			} while(!isGood);
+			
+			switch(Job.valueOf(choice)) {
+				case EXIT -> Console.info("프로그램을 종료합니다.");
+				case LIST -> this.list();
+				case ADD -> this.add();
+				case FIX -> this.fix();
+				case DEL -> this.del();
+			}
+		} while(choice != 0);
+	}
+	
 	private void list() {
 		if(workerService.getWorker().size() != 0) {
 			Console.info(" ID    이름      입사일");
@@ -23,8 +45,8 @@ public class WorkerIo {
 	
 	private void add() {
 		LocalDate hireDate = null;
-		
 		String workerName = Console.inName("추가할 노동자명을 입력하세요.");
+		
 		if(!workerName.equals("0")) {
 			hireDate = Console.inDate("입사일을 입력하세요.");
 		
@@ -75,27 +97,5 @@ public class WorkerIo {
 				workerService.delWorker(choiceId);
 			} while(!isGood);
 		} else Console.info("취소");
-	}
-	
-	public void play() {
-		int choice = 0;
-		
-		do {
-			boolean isGood = false;
-			
-			do {
-				choice = Console.inNum("1.목록, 2.추가, 3.수정, 4.삭제, 0.종료");
-				isGood = 0 <= choice && choice <= 4;
-				if(!isGood) Console.err("0에서 4사이 숫자를 입력하세요.");
-			} while(!isGood);
-			
-			switch(Job.valueOf(choice)) {
-				case EXIT -> Console.info("프로그램을 종료합니다.");
-				case LIST -> this.list();
-				case ADD -> this.add();
-				case FIX -> this.fix();
-				case DEL -> this.del();
-			}
-		} while(choice != 0);
 	}
 }
