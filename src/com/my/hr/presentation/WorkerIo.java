@@ -1,6 +1,8 @@
 package com.my.hr.presentation;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.my.hr.domain.Worker;
 import com.my.hr.service.WorkerService;
@@ -65,7 +67,10 @@ public class WorkerIo {
 			choiceId = Console.inNum("수정할 노동자의 ID를 입력하세요.");
 			if(choiceId == 0) cancel = true;
 			else {
-				isGood = 1 <= choiceId && choiceId <= workerService.getWorker().size();
+				List<Integer> workerId = new ArrayList<>();
+				for(Worker worker: workerService.getWorker())
+					workerId.add(worker.getWorkerId());
+				isGood = -1 != workerId.indexOf(choiceId);
 				if(!isGood) Console.err("잘못된 노동자ID 입니다.");
 			}
 		} while(!isGood && !cancel);
@@ -87,7 +92,10 @@ public class WorkerIo {
 			choiceId = Console.inNum("삭제할 노동자의 ID를 입력하세요.");
 			if(choiceId == 0) cancel = true;
 			else {
-				isGood = 1 <= choiceId && choiceId <= workerService.getWorker().size();
+				List<Integer> workerId = new ArrayList<>();
+				for(Worker worker: workerService.getWorker())
+					workerId.add(worker.getWorkerId());
+				isGood = -1 != workerId.indexOf(choiceId);
 				if(!isGood) Console.err("잘못된 노동자ID 입니다.");
 			}
 		} while(!isGood && !cancel);
