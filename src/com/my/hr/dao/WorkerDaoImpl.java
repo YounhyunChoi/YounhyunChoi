@@ -11,17 +11,17 @@ public class WorkerDaoImpl implements WorkerDao {
 	private int choice;
 	
 	public WorkerDaoImpl(List<Worker> worker) {
-		this.workers = worker;
+		workers = worker;
 	}
 
 	@Override
 	public List<Worker> selectWorker() {
-		return this.workers;
+		return workers;
 	}
 
 	@Override
 	public void insertWorker(Worker worker) {
-		this.workers.add(worker);
+		workers.add(worker);
 	}
 
 	@Override
@@ -29,12 +29,12 @@ public class WorkerDaoImpl implements WorkerDao {
 		Worker worker = this.workers.get(choice);
 		worker.setWorkerName(workerName);
 		worker.setHireDate(hireDate);
-		this.workers.set(choice, worker);
+		workers.set(choice, worker);
 	}
 
 	@Override
 	public void deleteWorker() {
-		this.workers.remove(choice);
+		workers.remove(choice);
 	}
 
 	@Override
